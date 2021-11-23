@@ -1,21 +1,22 @@
 <template>
 	<view>
-		<h1>个人中心</h1>
+		<h1>carts</h1>
 	</view>
 </template>
 
 <script>
 	export default {
 		data() {
-			return {}
-		},
-		onLoad() {	
+			return {
+				
+			}
 		},
 		methods: {
+			
 		}
 	}
 </script>
 
-<style lang="scss" scoped>
+<style>
 
 </style>
