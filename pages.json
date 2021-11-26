@@ -27,9 +27,23 @@
 				"navigationBarTitleText": "商品分类",
 				"enablePullDownRefresh": false
 			}
-
+		}, {
+			"path": "pages/auth/login",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"enablePullDownRefresh": false
+			}
 		}
-	],
+	    ,{
+            "path" : "pages/auth/register",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "图书商城",

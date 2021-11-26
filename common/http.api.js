@@ -19,6 +19,11 @@ const install = (Vue, vm) => {
 	// 认证相关的
 	// 登录
 	vm.$u.api.authLogin = params => vm.$u.post('/api/auth/login', params)
+	
+	// 注册
+	vm.$u.api.authRegister = params => vm.$u.post('/api/auth/register', params)
+	// 请求用户信息
+	vm.$u.api.userInfo = () => vm.$u.get('/api/user')
 
 	// 将各个定义的接口名称，统一放进对象挂载到vm.$u.api(因为vm就是this，也即this.$u.api)下
 	// vm.$u.api = {

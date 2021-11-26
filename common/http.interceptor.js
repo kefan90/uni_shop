@@ -23,10 +23,10 @@ const install = (Vue, vm) => {
 		// 方式一，存放在vuex的token，假设使用了uView封装的vuex方式
 		// 见：https://uviewui.com/components/globalVariable.html
 		// config.header.token = vm.token;
-		config.header.Authorization = 'Bearer ' + vm.access_token
+		// config.header.Authorization = 'Bearer ' + vm.vuex_token
 		// config.header.Authorization = 'Bearer ' + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvYXBpLnNob3AuZWR1d29yay5jblwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYzNzUwMzAwNCwiZXhwIjoxNjM3ODYzMDA0LCJuYmYiOjE2Mzc1MDMwMDQsImp0aSI6ImZzNm9tVFFhTDNjREY0eVoiLCJzdWIiOjIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.u1AymzXOCW9psT5srsgzzDEhT1NZTOOM1pc9VTjDUwI'
 		// 方式二，如果没有使用uView封装的vuex方法，那么需要使用$store.state获取
-		// config.header.token = vm.$store.state.token;
+		config.header.Authorization = 'Bearer ' + vm.$store.state.vuex_token
 
 		// 方式三，如果token放在了globalData，通过getApp().globalData获取
 		// config.header.token = getApp().globalData.username;
@@ -61,13 +61,14 @@ const install = (Vue, vm) => {
 			vm.$u.toast(data.message)
 			return false;
 		} else if (statusCode == 401) {
-			// 假设401为token失效，这里跳转登录
-			vm.$u.toast('验证失败，请重新登录');
-			setTimeout(() => {
-				// 此为uView的方法，详见路由相关文档
-				vm.$u.route('/pages/user/login')
-			}, 1500)
-			return false;
+			// 密码错误情况
+			if (data.message == "Unauthorized") {
+				vm.$u.toast('密码错误');
+			} else {
+				// token过期，未登录权限
+				vm.$u.utils.isLogin()
+			}
+			return false
 		} else if (statusCode == 422) {
 			const {
 				errors

@@ -19,6 +19,10 @@ import httpInterceptor from '@/common/http.interceptor.js'
 // 这里需要写在最后，是为了等Vue创建对象完成，引入"app"对象(也即页面的"this"实例)
 Vue.use(httpInterceptor, app)
 
+// 自定义工具
+import utils from '@/common/utils.js'
+Vue.use(utils, app)
+
 // http接口API集中管理引入部分
 import httpApi from '@/common/http.api.js'
 Vue.use(httpApi, app)
